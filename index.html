@@ -1,456 +1,719 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5937MNQKK5"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {dataLayer.push(arguments);}
-    gtag('js', new Date());
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARCADE VAULT</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neon-cyan: #00f5ff;
+    --neon-pink: #ff0080;
+    --neon-purple: #9d00ff;
+    --neon-green: #00ff88;
+    --bg: #050510;
+    --bg2: #0a0a1a;
+    --bg3: #0f0f25;
+    --card-bg: #0d0d20;
+    --text: #e0e0ff;
+    --text-muted: #6060a0;
+  }
 
-    gtag('config', 'G-5937MNQKK5');
-  </script>
-  <title>MonkeyGG2</title>
-  <meta name="description" content="Cool site for stuff" />
-  <meta name="keywords"
-    content="games, gamez, unblocked, unblocked games, tunnel rush, run 3, run, 3, hacks, chrome dino unblocked, chrome dino, chrome dinosaur, dinosaur game, dinosaur, chrome hacks, chrome dino hacks, chrome dinosaur hacks, chrome dino game hack, unblocked game site, idle breakout, idle breakout hack, idle breakout save, idle breakout code, idle breakout save generator, idle breakout unblocked, 2048, 2048 unblocked, 2048 no ads, no ads, ads, 2048 high score, cookie clicker, cookie clicker unblocked, cookie clicker github, cookie clicker no ads, flappy bird, flappy bird no ads, flappy bird unblocked, flash games, flash, bloons, bloons tower defense, bloons td, bloons td 1, bloons td 2, bloons td 3, bloons td 4, bloons td 5, bloons td 6, online, duck life, duck life 1, duck life 2, ducklife 3, factory balls, learn to fly, learn to fly game, raft wars, the impossible quiz, this is the only level, impossible quiz, impossible quiz online, impossible quiz answers, impossible quiz question, imposible quiz, quiz, quiz answers, hextris, retrobowl, retrobowl unblocked, retrobowl online, rooftop snipers, rooftop snipers unblocked, slope, slope online, slope unblocked, slope unblocked site, slope unblocked no ads, slope unblocked google site, slope unblocked online, slope unblocked school, smart ball, tunnel rush, tunnel rush online, tunnel rush unblocked, tunnel rush unblocked site, tunnel rush unblocked no ads, tunnel rush unblocked google site, slope google site, tunnel rush google site, tunnel rush unblocked online, tunnel rush unblocked school" />
-  <meta name="og:image" content="favicon.png" />
-  <!-- preloading some resources -->
-  <link href="js/loading.js" rel="preload" as="script" />
-  <link href="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" rel="preload" as="script" />
-  <link href="css/loading.css" rel="preload" as="style" type="text/css" />
-  <link href="js/config.js" rel="prefetch" as="script" />
-  <link href="fonts/Flexi_IBM_VGA_True_437.svg" rel="prefetch" as="font" />
-  <link href="fonts/Flexi_IBM_VGA_True_437.woff" rel="prefetch" as="font" />
-  <link href="fonts/Flexi_IBM_VGA_True_437.woff2" rel="prefetch" as="font" />
-  <!-- now loading css -->
-  <link href="css/loading.css" rel="stylesheet" type="text/css" />
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Glow orbs */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(157,0,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(5,5,16,0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,245,255,0.15);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    position: relative;
+  }
+
+  .logo-glow {
+    position: absolute;
+    inset: 0;
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+    color: var(--neon-cyan);
+    filter: blur(8px);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .game-count {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    color: var(--neon-green);
+    letter-spacing: 2px;
+    border: 1px solid rgba(0,255,136,0.3);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+  }
+
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-weight: 900;
+    letter-spacing: 6px;
+    line-height: 1.1;
+    background: linear-gradient(180deg, #ffffff 0%, var(--neon-cyan) 60%, var(--neon-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+
+  /* SEARCH */
+  .search-wrap {
+    position: relative;
+    max-width: 560px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .search-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+    border-radius: 4px;
+    z-index: -1;
+    opacity: 0.6;
+  }
+
+  #search {
+    width: 100%;
+    background: var(--bg2);
+    border: none;
+    outline: none;
+    padding: 14px 20px 14px 48px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    color: var(--text);
+    border-radius: 3px;
+  }
+
+  #search::placeholder { color: var(--text-muted); }
+
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--neon-cyan);
+    font-size: 1.1rem;
+    pointer-events: none;
+  }
+
+  /* FILTERS */
+  .filters {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 2rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .filter-btn {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    padding: 6px 16px;
+    background: transparent;
+    border: 1px solid rgba(0,245,255,0.2);
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+    background: rgba(0,245,255,0.05);
+    box-shadow: 0 0 12px rgba(0,245,255,0.1);
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 2rem;
+    border-top: 1px solid rgba(0,245,255,0.08);
+    border-bottom: 1px solid rgba(0,245,255,0.08);
+    margin-bottom: 2rem;
+    background: rgba(10,10,26,0.5);
+  }
+
+  .stats-bar span {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+  }
+
+  .stats-bar .count {
+    color: var(--neon-green);
+  }
+
+  /* GAME GRID */
+  .grid-wrap {
+    position: relative;
+    z-index: 1;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* GAME CARD */
+  .game-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    display: block;
+    aspect-ratio: 4/3;
+  }
+
+  .game-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0,245,255,0.15), 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  .game-card:hover .card-thumb {
+    opacity: 0.7;
+  }
+
+  .game-card:hover .play-btn {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .game-card:hover .card-overlay {
+    opacity: 1;
+  }
+
+  /* Thumb (colored placeholder) */
+  .card-thumb {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
+    transition: opacity 0.2s;
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(157,0,255,0.1));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 40px;
+    height: 40px;
+    background: var(--neon-cyan);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.2s;
+    box-shadow: 0 0 20px rgba(0,245,255,0.5);
+  }
+
+  .play-btn::after {
+    content: '';
+    border-left: 14px solid var(--bg);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    margin-left: 3px;
+  }
+
+  .card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 10px;
+    background: linear-gradient(transparent, rgba(5,5,16,0.95));
+  }
+
+  .card-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+  }
+
+  /* GAME IFRAME MODAL */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: var(--bg);
+    flex-direction: column;
+  }
+
+  .modal.open { display: flex; }
+
+  .modal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    height: 52px;
+    background: var(--bg2);
+    border-bottom: 1px solid rgba(0,245,255,0.15);
+    flex-shrink: 0;
+  }
+
+  .modal-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+  }
+
+  .modal-close {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    background: transparent;
+    border: 1px solid rgba(255,0,128,0.4);
+    color: var(--neon-pink);
+    padding: 6px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover {
+    background: rgba(255,0,128,0.1);
+    box-shadow: 0 0 12px rgba(255,0,128,0.2);
+  }
+
+  #game-frame {
+    flex: 1;
+    border: none;
+    width: 100%;
+  }
+
+  /* NO RESULTS */
+  .no-results {
+    display: none;
+    text-align: center;
+    padding: 4rem 2rem;
+    grid-column: 1/-1;
+  }
+
+  .no-results p {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+  }
+
+  /* Scanline effect on cards */
+  .game-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+  }
+
+  @media (max-width: 600px) {
+    .game-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+    nav { padding: 0 1rem; }
+    .hero { padding: 2rem 1rem 1rem; }
+    .grid-wrap { padding: 0 1rem 3rem; }
+  }
+</style>
 </head>
-
 <body>
-  <noscript>
-    <p id="noscript-text">This site requires you to be able to run JavaScript.</p>
-  </noscript>
-  <div class="loading">
-    <div>
-      <div class="loading-tip"></div>
-      <div class="loading-infinity">
-        <br />
-        <svg class="infinity" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#5ebd3e" />
-              <stop offset="33%" stop-color="#ffb900" />
-              <stop offset="67%" stop-color="#f78200" />
-              <stop offset="100%" stop-color="#e23838" />
-            </linearGradient>
-            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
-              <stop offset="0%" stop-color="#e23838" />
-              <stop offset="33%" stop-color="#973999" />
-              <stop offset="67%" stop-color="#009cdf" />
-              <stop offset="100%" stop-color="#5ebd3e" />
-            </linearGradient>
-          </defs>
-          <g fill="none" stroke-linecap="round" stroke-width="16">
-            <g class="track" stroke="rgba(0,0,0,0)">
-              <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
-              <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
-            </g>
-            <g stroke-dasharray="180 656">
-              <path class="worm1" stroke="url(#grad1)" stroke-dashoffset="0"
-                d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
-              <path class="worm2" stroke="url(#grad2)" stroke-dashoffset="358"
-                d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
-            </g>
-          </g>
-        </svg>
-      </div>
-    </div>
-    <div class="loading-icon">
-      <img src="imgs/icon-256-256.png" alt="MonkeyGG2 Icon" />
-    </div>
-  </div>
-  <section id="everything-else">
-    <h1 id="title">MonkeyGG2</h1>
-    <logo>
-      <img src="imgs/icon-256-256.png" alt="MonkeyGG2 Icon" />
-    </logo>
-    <div id="particles"></div>
-    <dialog id="disabled">
-      <div>This feature has been disabled by whoever is hosting this MonkeyGG2 instance.</div>
-    </dialog>
-    <div class="cloaklaunch">
-      <h1 class="cloaker">Press Anywhere to cloak</h1>
-      <h3 class="cloaker">(If you want to stop seeing this enable popups)</h3>
-      <span id="disableCloak">Click here if cloak isn't working</button>
-    </div>
-    <div class="homepage">
-      <div class="card-row">
-        <div class="column">
-          <button>
-            <div class="card" data="games">
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                  xmlns:svgjs="http://svgjs.com/svgjs" width="256" height="256" x="0" y="0" viewBox="0 0 512 512"
-                  style="margin: 1rem 0" xml:space="preserve">
-                  <defs>
-                    <linearGradient id="a" x1="-38.17" x2="-29.916" y1="631.934" y2="623.68"
-                      gradientTransform="matrix(21.3333 0 0 -21.3333 996.333 13791.667)" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" style="
-                                                        stop-color: rgb(0, 0, 0);
-                                                        stop-opacity: 0.1;
-                                                        --darkreader-inline-stopcolor: #e8e6e3;
-                                                    " stop-color="" data-darkreader-inline-stopcolor=""></stop>
-                      <stop offset="1" style="
-                                                        stop-color: rgb(0, 0, 0);
-                                                        stop-opacity: 0;
-                                                        --darkreader-inline-stopcolor: #e8e6e3;
-                                                    " stop-color="" data-darkreader-inline-stopcolor=""></stop>
-                    </linearGradient>
-                    <linearGradient id="b" x1="-45.683" x2="-24.059" y1="639.332" y2="629.249"
-                      gradientTransform="matrix(21.3333 0 0 -21.3333 996.333 13791.667)" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" style="
-                                                        stop-color: rgb(255, 255, 255);
-                                                        stop-opacity: 0.2;
-                                                        --darkreader-inline-stopcolor: #e8e6e3;
-                                                    " stop-color="" data-darkreader-inline-stopcolor=""></stop>
-                      <stop offset="1" style="
-                                                        stop-color: rgb(255, 255, 255);
-                                                        stop-opacity: 0;
-                                                        --darkreader-inline-stopcolor: #e8e6e3;
-                                                    " stop-color="" data-darkreader-inline-stopcolor=""></stop>
-                    </linearGradient>
-                  </defs>
-                  <g>
-                    <path
-                      d="M512 256C512 114.844 397.167 0 256 0S0 114.844 0 256c0 69.727 30.309 121.482 89.641 154.245C101.427 492.888 137.385 512 256 512c115.302 0 152.566-17.882 165.385-94.788C481.357 386.198 512 332.13 512 256z"
-                      style="--darkreader-inline-fill: #263035" fill="#303C42" data-original="#303c42"
-                      data-darkreader-inline-fill=""></path>
-                    <path
-                      d="M488.715 285.333C463.018 261.271 448 227.522 448 192c0-18.168 3.918-36.04 11.402-52.533 19.776 34.38 31.264 74.103 31.264 116.533.001 10.32-.771 19.995-1.951 29.333z"
-                      style="--darkreader-inline-fill: #1f2223" fill="#F2F2F2" data-original="#f2f2f2"
-                      data-darkreader-inline-fill=""></path>
-                    <circle cx="256" cy="149.333" r="106.667" style="--darkreader-inline-fill: #1f2223" fill="#F2F2F2"
-                      data-original="#f2f2f2" data-darkreader-inline-fill=""></circle>
-                    <path
-                      d="M52.598 139.467C60.082 155.96 64 173.832 64 192c0 35.251-14.844 68.836-40.258 92.868-1.428-9.247-2.409-18.764-2.409-28.868 0-42.43 11.489-82.152 31.265-116.533z"
-                      style="--darkreader-inline-fill: #1f2223" fill="#F2F2F2" data-original="#f2f2f2"
-                      data-darkreader-inline-fill=""></path>
-                    <path
-                      d="M256 490.667c-124.896 0-140.979-20.281-147.854-106.24 30.708-33.25 86.833-53.76 147.854-53.76s117.146 20.51 147.854 53.76c-6.875 85.958-22.958 106.24-147.854 106.24z"
-                      style="--darkreader-inline-fill: #4e2302" fill="#FEE4D0" data-original="#fee4d0"
-                      data-darkreader-inline-fill=""></path>
-                    <path
-                      d="M424.6 390.984c.292-3.152.632-6.142.879-9.453a10.743 10.743 0 0 0-2.521-7.719C389.02 334.041 325.041 309.333 256 309.333s-133.021 24.708-166.958 64.479a10.743 10.743 0 0 0-2.521 7.719c.057.76.143 1.418.202 2.169-28.641-19.128-47.729-44.467-57.525-75.514C64.376 279.922 85.333 237.188 85.333 192c0-25.608-6.943-50.56-19.53-72.911 40.25-55.755 104.251-93.048 177.122-97.092C178.461 28.566 128 83.163 128 149.333c0 70.583 57.417 128 128 128s128-57.417 128-128c0-66.171-50.461-120.767-114.926-127.337 72.871 4.044 136.872 41.337 177.122 97.092-12.587 22.352-19.53 47.303-19.53 72.911 0 45.802 21.447 88.967 57.414 117.219-9.359 35.352-29.006 62.456-59.48 81.766z"
-                      style="--darkreader-inline-fill: #a72323" fill="#D32F2F" data-original="#d32f2f" class=""
-                      data-darkreader-inline-fill=""></path>
-                    <path
-                      d="M488.715 285.333C463.018 261.271 448 227.522 448 192c0-18.168 3.918-36.04 11.402-52.533 19.776 34.38 31.264 74.103 31.264 116.533.001 10.32-.771 19.995-1.951 29.333z"
-                      style="--darkreader-inline-fill: #1f2223" fill="#F2F2F2" data-original="#f2f2f2"
-                      data-darkreader-inline-fill=""></path>
-                    <path
-                      d="M424.6 390.984c.292-3.152.632-6.142.879-9.453a10.743 10.743 0 0 0-2.521-7.719C389.02 334.041 325.041 309.333 256 309.333s-133.021 24.708-166.958 64.479a10.743 10.743 0 0 0-2.521 7.719c.057.76.143 1.418.202 2.169-28.641-19.128-47.729-44.467-57.525-75.514C64.376 279.922 85.333 237.188 85.333 192c0-25.608-6.943-50.56-19.53-72.911 40.25-55.755 104.251-93.048 177.122-97.092C178.461 28.566 128 83.163 128 149.333c0 70.583 57.417 128 128 128s128-57.417 128-128c0-66.171-50.461-120.767-114.926-127.337 72.871 4.044 136.872 41.337 177.122 97.092-12.587 22.352-19.53 47.303-19.53 72.911 0 45.802 21.447 88.967 57.414 117.219-9.359 35.352-29.006 62.456-59.48 81.766z"
-                      style="--darkreader-inline-fill: #a72323" fill="#D32F2F" data-original="#d32f2f" class=""
-                      data-darkreader-inline-fill=""></path>
-                    <linearGradient id="a" x1="-38.17" x2="-29.916" y1="631.934" y2="623.68"
-                      gradientTransform="matrix(21.3333 0 0 -21.3333 996.333 13791.667)" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" style="
-                                                        stop-color: rgb(0, 0, 0);
-                                                        stop-opacity: 0.1;
-                                                        --darkreader-inline-stopcolor: #e8e6e3;
-                                                    " stop-color="" data-darkreader-inline-stopcolor=""></stop>
-                      <stop offset="1" style="
-                                                        stop-color: rgb(0, 0, 0);
-                                                        stop-opacity: 0;
-                                                        --darkreader-inline-stopcolor: #e8e6e3;
-                                                    " stop-color="" data-darkreader-inline-stopcolor=""></stop>
-                    </linearGradient>
-                    <path
-                      d="M256 490.667c124.896 0 140.979-20.281 147.854-106.24-30.708-33.25-86.833-53.76-147.854-53.76s-117.146 20.51-147.854 53.76l105.138 105.138c12.616.758 26.752 1.102 42.716 1.102z"
-                      fill="url('#a')"></path>
-                    <path
-                      d="M197.333 362.667c-8.313 0-16 5.167-16 42.667s7.688 42.667 16 42.667 16-5.167 16-42.667-7.687-42.667-16-42.667zM314.667 448c8.313 0 16-5.167 16-42.667s-7.688-42.667-16-42.667-16 5.167-16 42.667 7.687 42.667 16 42.667z"
-                      style="--darkreader-inline-fill: #263035" fill="#303C42" data-original="#303c42"
-                      data-darkreader-inline-fill=""></path>
-                    <linearGradient id="b" x1="-45.683" x2="-24.059" y1="639.332" y2="629.249"
-                      gradientTransform="matrix(21.3333 0 0 -21.3333 996.333 13791.667)" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" style="
-                                                        stop-color: rgb(255, 255, 255);
-                                                        stop-opacity: 0.2;
-                                                        --darkreader-inline-stopcolor: #e8e6e3;
-                                                    " stop-color="" data-darkreader-inline-stopcolor=""></stop>
-                      <stop offset="1" style="
-                                                        stop-color: rgb(255, 255, 255);
-                                                        stop-opacity: 0;
-                                                        --darkreader-inline-stopcolor: #e8e6e3;
-                                                    " stop-color="" data-darkreader-inline-stopcolor=""></stop>
-                    </linearGradient>
-                    <path
-                      d="M512 256C512 114.844 397.167 0 256 0S0 114.844 0 256c0 69.727 30.309 121.482 89.641 154.245C101.427 492.888 137.385 512 256 512c115.302 0 152.566-17.882 165.385-94.788C481.357 386.198 512 332.13 512 256z"
-                      fill="url('#b')"></path>
-                    <path
-                      d="M23.742 284.868c3.85-3.642 7.37-7.566 10.72-11.618-4.297-1.536-8.4-3.263-12.57-4.923.422 5.63 1.018 11.156 1.85 16.541zM449.07 207.586c3.703 29.678 17.746 57.241 39.645 77.747 1.18-9.339 1.952-19.013 1.952-29.333 0-28.292-5.501-55.197-14.768-80.301-7.464 11.19-16.491 21.837-26.829 31.887zM55.904 280.103c-7.65 10.348-16.496 19.88-26.706 28.083 9.796 31.047 28.884 56.387 57.525 75.514-.059-.751-.145-1.409-.202-2.169a10.743 10.743 0 0 1 2.521-7.719c33.938-39.771 97.917-64.479 166.958-64.479s133.021 24.708 166.958 64.479a10.743 10.743 0 0 1 2.521 7.719c-.247 3.311-.587 6.301-.879 9.453 30.474-19.31 50.121-46.414 59.48-81.766-27.411-21.531-46.306-51.745-53.784-85.165-57.753 45.495-145.493 74.613-243.63 74.613-46.687.001-90.877-6.761-130.762-18.563z"
-                      style="opacity: 0.1; --darkreader-inline-fill: #000000" fill="#000000" data-original="#000000"
-                      class="" data-darkreader-inline-fill=""></path>
-                  </g>
-                </svg>
-              </div>
-              <h5>Games</h5>
-              <p> We have a huge collection of 150+ games for you to try out! Ranging from lesser known titles to the
-                most popular games, we have it all! </p>
-            </div>
-          </button>
-        </div>
-        <div class="column">
-          <button>
-            <div class="card" data="proxy">
-              <div class="img-container">
-                <img src="imgs/violet-256-256.png" alt="Proxy Icon" />
-              </div>
-              <h5>Proxy</h5>
-              <p> Our proxy will let you bypass network restrictions so you can access sites and even play online
-                browser games without censorship! </p>
-            </div>
-          </button>
-        </div>
-        <div class="column">
-          <button>
-            <div class="card" data="settings">
-              <div class="img-container">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                  xmlns:svgjs="http://svgjs.com/svgjs" width="256" height="256" x="0" y="0"
-                  viewBox="0 0 512.207 512.207" style="enable-background: new 0 0 512 512" xml:space="preserve">
-                  <g>
-                    <path fill="#587AA1"
-                      d="M466.104 256.049c0-4.883-.174-9.82-.52-14.754l46.624-39.918-2.277-9.018a265.273 265.273 0 0 0-12.022-36.324 265.347 265.347 0 0 0-17.176-34.17l-4.767-7.987-61.095 4.734a211.766 211.766 0 0 0-21.075-21.108l4.743-61.208-7.987-4.766a265.257 265.257 0 0 0-34.185-17.184A265.223 265.223 0 0 0 320.059 2.33L311.041.053l-39.847 46.54a210.79 210.79 0 0 0-15.089-.542l-45 44.997 45 45c66.168 0 120 53.832 120 120s-53.832 120-120 120l-45 45 45 44.998c4.911 0 9.82-.172 14.754-.518l39.918 46.624 9.018-2.277a265.273 265.273 0 0 0 36.324-12.022 265.083 265.083 0 0 0 34.169-17.177l7.987-4.766-4.734-61.095a211.659 211.659 0 0 0 21.108-21.075l61.208 4.743 4.766-7.987a265.257 265.257 0 0 0 17.184-34.185 265.223 265.223 0 0 0 12.016-36.308l2.277-9.018-46.54-39.847c.361-5.05.544-10.099.544-15.089z"
-                      data-original="#587aa1"></path>
-                    <path fill="#6C90B8"
-                      d="M46.104 256.049c0-4.883.174-9.82.52-14.754L0 201.377l2.277-9.018a265.273 265.273 0 0 1 12.022-36.324 265.347 265.347 0 0 1 17.176-34.17l4.767-7.987 61.095 4.734a211.766 211.766 0 0 1 21.075-21.108l-4.743-61.208 7.987-4.766a265.257 265.257 0 0 1 34.185-17.184A265.223 265.223 0 0 1 192.149 2.33l9.018-2.277 39.847 46.54a210.79 210.79 0 0 1 15.089-.542v89.997c-66.168 0-120 53.832-120 120s53.832 120 120 120v89.998c-4.911 0-9.82-.172-14.754-.518l-39.918 46.624-9.018-2.277a265.273 265.273 0 0 1-36.324-12.022 265.083 265.083 0 0 1-34.169-17.177l-7.987-4.766 4.734-61.095a211.659 211.659 0 0 1-21.108-21.075l-61.208 4.743-4.766-7.987a265.257 265.257 0 0 1-17.184-34.185 265.223 265.223 0 0 1-12.016-36.308l-2.277-9.018 46.54-39.847a211.384 211.384 0 0 1-.544-15.089z"
-                      data-original="#6c90b8"></path>
-                    <path fill="#81A6C7"
-                      d="m256.104 106.049-30 30 30 30c49.626 0 90 40.374 90 90s-40.374 90-90 90l-30 30 30 30c82.711 0 150-67.289 150-150s-67.29-150-150-150z"
-                      data-original="#81a6c7"></path>
-                    <path fill="#97BEDB"
-                      d="M166.104 256.049c0-49.626 40.374-90 90-90v-60c-82.711 0-150 67.289-150 150s67.289 150 150 150v-60c-49.626 0-90-40.374-90-90z"
-                      data-original="#97bedb"></path>
-                  </g>
-                </svg>
-              </div>
-              <h5>Settings</h5>
-              <p>A ton of customizable settings and features all at your fingertips!</p>
-            </div>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="games">
-      <div class="searchbar">
-        <input type="text" id="search" placeholder="Search For Games..." />
-        <select id="sort">
-          <option value="alphabetical">Alphabetical</option>
-          <option value="reverse">Reverse Alphabetical</option>
-        </select>
-        <button class="randgame" onclick="randomGame()">Random Game</button>
-      </div>
-      <ul id="gamesList"></ul>
-    </div>
-    <div class="settings">
-      <div class="setting-bg">
-        <h4>Settings</h4>
-        <h6>Notice: All changes occur on page refresh</h6>
-        <div class="setting">
-          <button class="save-button" id="download">Download Game Data</button>
-          <button class="save-button" id="upload">Upload Game Data</button>
-          <p class="upload-result"></p>
-        </div>
-        <div class="setting">
-          <h5>Cloak and Mask Presets</h5>
-          <p>If the 2 settings are enabled, choose without typing it out</p>
-          <select id="presets">
-            <option value="classroom">Google Classroom</option>
-            <option value="drive">Google Drive</option>
-            <option value="mail">Google Mail</option>
-            <option value="canvas">Canvas</option>
-          </select>
-          <button class="submit-button" onclick="updatePreset()">Submit</button>
-        </div>
-        <div class="setting">
-          <h5>Cloak</h5>
-          <p>Toggles if Cloak (Hides site from history and being view online) is forced</p>
-          <label class="switch">
-            <input id="cloakCheckboxInput" type="checkbox" hidden />
-            <div class="switch__wrapper">
-              <div class="switch__toggle"></div>
-            </div>
-          </label>
-        </div>
-        <div class="setting">
-          <h5>Cloak URL</h5>
-          <p>This site will appear in your history instead of MonkeyGG2.</p>
-          <input id="cloakUrlInput" class="text-field" type="text" placeholder="https://classroom.google.com" />
-          <button id="cloakUrlSubmit" class="submit-button">Submit</button>
-        </div>
-        <div class="setting">
-          <h5>Mask</h5>
-          <p>Toggles if mask is applied on loading of a page automatically</p>
-          <label class="switch">
-            <input id="maskCheckboxInput" type="checkbox" hidden />
-            <div class="switch__wrapper">
-              <div class="switch__toggle"></div>
-            </div>
-          </label>
-        </div>
-        <div class="setting">
-          <h5>Mask Title</h5>
-          <p>This site's title will replace MonkeyGG2's title in your browser tab.</p>
-          <input id="maskTitleInput" class="text-field" type="text" placeholder="Home" />
-          <button id="maskTitleSubmit" class="submit-button">Submit</button>
-        </div>
-        <div class="setting">
-          <h5>Mask Icon URL</h5>
-          <p> This site's icon will replace MonkeyGG2's icon in your browser tab. (Don't forget https://) </p>
-          <input id="maskIconInput" class="text-field" type="text"
-            placeholder="https://ssl.gstatic.com/classroom/ic_product_classroom_32.png" />
-          <button id="maskIconSubmit" class="submit-button">Submit</button>
-        </div>
-        <div class="setting">
-          <h5>Shortcuts</h5>
-          <p> Shortcuts will help some people navigate the site easier. DISCLAIMER!! Certain shortcuts such as CTRL+R
-            and CTRL+W cannot be overriden manually. </p>
-        </div>
-        <div class="setting">
-          <!--thers prolly a more efficent way to do this but this is what i have rn-->
-          <div id="keybind-1">
-            <h5>Slot 1</h5>
-            <p>Press a button then press a key on your keyboard to choose</p>
-            <button class="keySlot 1">Set Key</button>
-            <p style="display: inline;">+</p>
-            <button class="keySlot 2">Set Key</button>
-            <p style="display: inline;">+</p>
-            <button class="keySlot 3">Set Key (Optional)</button>
-            <p style="display: inline;">=</p>
-            <select class="slot-action">
-              <option value="makecloak()">Cloak</option>
-              <option value="mask()">Mask</option>
-              <option value="returnHome()">Return to Home</option>
-              <option value="mute()">Mute</option>
-              <option value="#">Pop-up Tab</option>
-              <option value="eval(prompt('What do you want to run?')); pressedKeys = {};">Custom JS</option>
-              <option value="#">Select an option ▼</option>
-            </select>
-          </div>
-          <div id="keybind-2">
-            <h5>Slot 2</h5>
-            <p>Press a button then press a key on your keyboard to choose</p>
-            <button class="keySlot 1">Set Key</button>
-            <p style="display: inline;">+</p>
-            <button class="keySlot 2">Set Key</button>
-            <p style="display: inline;">+</p>
-            <button class="keySlot 3">Set Key (Optional)</button>
-            <p style="display: inline;">=</p>
-            <select class="slot-action">
-              <option value="makecloak()">Cloak</option>
-              <option value="mask()">Mask</option>
-              <option value="returnHome()">Return to Home</option>
-              <option value="mute()">Mute</option>
-              <option value="#">Pop-up Tab</option>
-              <option value="eval(prompt('What do you want to run?')); pressedKeys = {};">Custom JS</option>
-              <option value="#">Select an option ▼</option>
-            </select>
-          </div>
-          <div id="keybind-3">
-            <h5>Slot 3</h5>
-            <p>Press a button then press a key on your keyboard to choose</p>
-            <button class="keySlot 1">Set Key</button>
-            <p style="display: inline;">+</p>
-            <button class="keySlot 2">Set Key</button>
-            <p style="display: inline;">+</p>
-            <button class="keySlot 3">Set Key (Optional)</button>
-            <p style="display: inline;">=</p>
-            <select class="slot-action">
-              <option value="makecloak()">Cloak</option>
-              <option value="mask()">Mask</option>
-              <option value="returnHome()">Return to Home</option>
-              <option value="mute()">Mute</option>
-              <option value="#">Pop-up Tab</option>
-              <option value="eval(prompt('What do you want to run?')); pressedKeys = {};">Custom JS</option>
-              <option value="#">Select an option ▼</option>
-            </select>
-          </div>
-        </div>
-        <div class="setting">
-          <h5>Background</h5>
-          <p>Background can cause a lot of lag. Disable if your computer is diagnosed with low FPS.</p>
-          <label class="switch">
-            <input type="checkbox" id="backgroundCheckboxInput" hidden />
-            <div class="switch__wrapper">
-              <div class="switch__toggle"></div>
-            </div>
-          </label>
-        </div>
-        <h4>Appearance</h4>
-        <div class="setting">
-          <h5>Custom Theme (change on refresh)</h5>
-          <label for="bg">Background Color:</label>
-          <input type="color" id="bg" name="bg" value="#202020" class="color-input" />
-          <br />
-          <label for="block-color">Block Color:</label>
-          <input type="color" id="block-color" name="block-color" value="#2b2b2b" class="color-input" />
-          <br />
-          <label for="button-color">Button Color:</label>
-          <input type="color" id="button-color" name="button-color" value="#373737" class="color-input" />
-          <br />
-          <label for="games-color">Games Color:</label>
-          <input type="color" id="games-color" name="games-color" value="#373737a6" class="color-input" />
-          <br />
-          <label for="hover-color">Hover Color:</label>
-          <input type="color" id="hover-color" name="hover-color" value="#3c3c3c" class="color-input" />
-          <br />
-          <label for="scrollbar-color">Scrollbar Color:</label>
-          <input type="color" id="scrollbar-color" name="scrollbar-color" value="#434343" class="color-input" />
-          <br />
-          <label for="scroll-track-color">Scroll Track Color:</label>
-          <input type="color" id="scroll-track-color" name="scroll-track-color" value="#111" class="color-input" />
-          <br />
-          <label for="font-color">Font Color:</label>
-          <input type="color" id="font-color" name="font-color" value="#dcddde" class="color-input" />
-          <br />
-          <button class="save-button" onclick="restoreColorChanges()">Restore Defaults</button>
-          <button class="save-button" onClick="saveColorChanges()">Save Changes</button>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="page-loader">
-    <iframe></iframe>
-    <button id="gameButton" class="in-game-button">
-      <svg class="svg-inline--fa fa-chevron-left fa-w-10" aria-hidden="true" focusable="false" data-prefix="fas"
-        data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
-        <path fill="currentColor"
-          d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z">
-        </path>
-      </svg>
-      <!-- <i class="fas fa-chevron-left"></i> Font Awesome fontawesome.com -->
-      <img src="imgs/icon-256-256.png" width="36" height="36" alt="Logo" />
-    </button>
-    <button id="refresh" class="in-game-button">
-      <img src="imgs/refresh.png" width="40" height="36" alt="Logo" />
-      <svg class="svg-inline--fa fa-chevron-left fa-w-10" aria-hidden="true" focusable="false" data-prefix="fas"
-        data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
-        <path fill="currentColor"
-          d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z">
-        </path>
-      </svg>
-      <!-- <i class="fas fa-chevron-left"></i> Font Awesome fontawesome.com -->
-    </button>
-  </section>
-  <script src="js/config.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-  <script src="js/loading.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.8.0/lib/p5.min.js" defer></script>
-  <script src="js/bg.js" defer></script>
-  <script src="js/index.js" defer></script>
-</body>
 
+<nav>
+  <div style="position:relative">
+    <span class="logo-glow" aria-hidden="true">ARCADE VAULT</span>
+    <span class="logo">ARCADE VAULT</span>
+  </div>
+  <div class="nav-right">
+    <span class="game-count" id="nav-count">110 GAMES</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>PLAY ANYTHING</h1>
+  <p>Free browser games — no download required</p>
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input type="text" id="search" placeholder="SEARCH GAMES..." autocomplete="off" spellcheck="false">
+  </div>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" data-filter="all">All Games</button>
+  <button class="filter-btn" data-filter="action">Action</button>
+  <button class="filter-btn" data-filter="puzzle">Puzzle</button>
+  <button class="filter-btn" data-filter="racing">Racing</button>
+  <button class="filter-btn" data-filter="idle">Idle</button>
+  <button class="filter-btn" data-filter="multiplayer">Multiplayer</button>
+  <button class="filter-btn" data-filter="platformer">Platformer</button>
+</div>
+
+<div class="stats-bar">
+  <span>ARCADE VAULT</span>
+  <span><span class="count" id="result-count">110</span> GAMES AVAILABLE</span>
+  <span>FREE TO PLAY</span>
+</div>
+
+<div class="grid-wrap">
+  <div class="game-grid" id="game-grid"></div>
+</div>
+
+<!-- Game modal -->
+<div class="modal" id="modal">
+  <div class="modal-bar">
+    <span class="modal-title" id="modal-title">LOADING...</span>
+    <button class="modal-close" id="close-btn">✕ CLOSE</button>
+  </div>
+  <iframe id="game-frame" src="" allowfullscreen></iframe>
+</div>
+
+<script>
+const games = [
+  { slug: "10-minutes-till-dawn", name: "10 Minutes Till Dawn", tags: ["action"] },
+  { slug: "1v1-lol", name: "1v1 LOL", tags: ["action","multiplayer"] },
+  { slug: "2048", name: "2048", tags: ["puzzle"] },
+  { slug: "a-dark-room", name: "A Dark Room", tags: ["idle"] },
+  { slug: "abandoned-2", name: "Abandoned 2", tags: ["action"] },
+  { slug: "abandoned", name: "Abandoned", tags: ["action"] },
+  { slug: "ages-of-conflict", name: "Ages of Conflict", tags: ["action"] },
+  { slug: "aground", name: "Aground", tags: ["idle"] },
+  { slug: "amidst-the-sky", name: "Amidst the Sky", tags: ["action"] },
+  { slug: "ampler-launcher", name: "Ampler Launcher", tags: ["action"] },
+  { slug: "another-gentlemans-adventure", name: "Another Gentleman's Adventure", tags: ["platformer"] },
+  { slug: "awesome-tanks-2", name: "Awesome Tanks 2", tags: ["action"] },
+  { slug: "awesome-tanks", name: "Awesome Tanks", tags: ["action"] },
+  { slug: "babel-tower", name: "Babel Tower", tags: ["puzzle"] },
+  { slug: "basket-random", name: "Basket Random", tags: ["multiplayer"] },
+  { slug: "basketball-stars", name: "Basketball Stars", tags: ["multiplayer"] },
+  { slug: "bit-life", name: "Bit Life", tags: ["idle"] },
+  { slug: "boxing-random", name: "Boxing Random", tags: ["multiplayer"] },
+  { slug: "brawl-stars-project-laser", name: "Brawl Stars Project Laser", tags: ["action"] },
+  { slug: "breaklock", name: "Breaklock", tags: ["puzzle"] },
+  { slug: "chrome-dino", name: "Chrome Dino", tags: ["action"] },
+  { slug: "clicker-heroes-updated", name: "Clicker Heroes Updated", tags: ["idle"] },
+  { slug: "clicker-heroes", name: "Clicker Heroes", tags: ["idle"] },
+  { slug: "conways-game-of-life", name: "Conway's Game of Life", tags: ["puzzle"] },
+  { slug: "cookie-clicker", name: "Cookie Clicker", tags: ["idle"] },
+  { slug: "core-ball", name: "Core Ball", tags: ["puzzle"] },
+  { slug: "crossy-road", name: "Crossy Road", tags: ["action"] },
+  { slug: "cut-the-rope", name: "Cut the Rope", tags: ["puzzle"] },
+  { slug: "doge-miner", name: "Doge Miner", tags: ["idle"] },
+  { slug: "doodle-jump", name: "Doodle Jump", tags: ["platformer"] },
+  { slug: "drift-boss", name: "Drift Boss", tags: ["racing"] },
+  { slug: "drive-mad-s", name: "Drive Mad S", tags: ["racing"] },
+  { slug: "drive-mad", name: "Drive Mad", tags: ["racing"] },
+  { slug: "duck-life-4", name: "Duck Life 4", tags: ["action"] },
+  { slug: "dune", name: "Dune", tags: ["action"] },
+  { slug: "eggy-car", name: "Eggy Car", tags: ["racing"] },
+  { slug: "evowars", name: "Evowars", tags: ["action","multiplayer"] },
+  { slug: "family-feud", name: "Family Feud", tags: ["puzzle"] },
+  { slug: "fireboy-and-watergirl-2", name: "Fireboy and Watergirl 2", tags: ["platformer","multiplayer"] },
+  { slug: "fireboy-and-watergirl-3", name: "Fireboy and Watergirl 3", tags: ["platformer","multiplayer"] },
+  { slug: "fireboy-and-watergirl-4", name: "Fireboy and Watergirl 4", tags: ["platformer","multiplayer"] },
+  { slug: "fireboy-and-watergirl", name: "Fireboy and Watergirl", tags: ["platformer","multiplayer"] },
+  { slug: "five-nights-at-epsteins", name: "Five Nights at Epsteins", tags: ["action"] },
+  { slug: "flappy-bird", name: "Flappy Bird", tags: ["action"] },
+  { slug: "flash", name: "Flash", tags: ["action"] },
+  { slug: "friday-night-funkin", name: "Friday Night Funkin", tags: ["action"] },
+  { slug: "geometry-dash-lite", name: "Geometry Dash Lite", tags: ["platformer"] },
+  { slug: "geometry-dash-remastered", name: "Geometry Dash Remastered", tags: ["platformer"] },
+  { slug: "geometry-vibes-monster", name: "Geometry Vibes Monster", tags: ["platformer"] },
+  { slug: "geometry-vibes-x-ball", name: "Geometry Vibes X Ball", tags: ["platformer"] },
+  { slug: "geometry-vibes", name: "Geometry Vibes", tags: ["platformer"] },
+  { slug: "getaway-shootout", name: "Getaway Shootout", tags: ["action","multiplayer"] },
+  { slug: "gons-io", name: "Gons IO", tags: ["action","multiplayer"] },
+  { slug: "gunspin", name: "Gunspin", tags: ["action"] },
+  { slug: "hextris", name: "Hextris", tags: ["puzzle"] },
+  { slug: "idle-breakout", name: "Idle Breakout", tags: ["idle"] },
+  { slug: "incremancer", name: "Incremancer", tags: ["idle"] },
+  { slug: "lion-soldiers-vengeance", name: "Lion Soldiers Vengeance", tags: ["action"] },
+  { slug: "maptroid", name: "Maptroid", tags: ["platformer"] },
+  { slug: "mario-game", name: "Mario Game", tags: ["platformer"] },
+  { slug: "monkey-mart", name: "Monkey Mart", tags: ["idle"] },
+  { slug: "motox3m", name: "Moto X3M", tags: ["racing"] },
+  { slug: "n-gon", name: "N-Gon", tags: ["action"] },
+  { slug: "n-step-steve-part-1", name: "N-Step Steve Part 1", tags: ["platformer"] },
+  { slug: "n-step-steve-part-2", name: "N-Step Steve Part 2", tags: ["platformer"] },
+  { slug: "ovo", name: "OVO", tags: ["platformer"] },
+  { slug: "particle-clicker", name: "Particle Clicker", tags: ["idle"] },
+  { slug: "pcraft", name: "Pcraft", tags: ["action"] },
+  { slug: "planet-life", name: "Planet Life", tags: ["idle"] },
+  { slug: "progress-knight-quest", name: "Progress Knight Quest", tags: ["idle"] },
+  { slug: "progress-knight-reborn", name: "Progress Knight Reborn", tags: ["idle"] },
+  { slug: "pull-of-war", name: "Pull of War", tags: ["multiplayer"] },
+  { slug: "reach-the-core", name: "Reach the Core", tags: ["idle"] },
+  { slug: "restless-wing-syndrome", name: "Restless Wing Syndrome", tags: ["action"] },
+  { slug: "retro-bowl-old", name: "Retro Bowl Old", tags: ["action"] },
+  { slug: "retro-bowl", name: "Retro Bowl", tags: ["action"] },
+  { slug: "rift-shift", name: "Rift Shift", tags: ["puzzle"] },
+  { slug: "rocket-league-2d", name: "Rocket League 2D", tags: ["multiplayer","racing"] },
+  { slug: "rooftop-snipers", name: "Rooftop Snipers", tags: ["action","multiplayer"] },
+  { slug: "rookie-bowman", name: "Rookie Bowman", tags: ["action"] },
+  { slug: "run-3-beta", name: "Run 3 Beta", tags: ["platformer"] },
+  { slug: "run-3", name: "Run 3", tags: ["platformer"] },
+  { slug: "sabercut", name: "Sabercut", tags: ["action"] },
+  { slug: "sandspiel", name: "Sandspiel", tags: ["puzzle"] },
+  { slug: "scuba-bear", name: "Scuba Bear", tags: ["action"] },
+  { slug: "shadow-fight", name: "Shadow Fight", tags: ["action"] },
+  { slug: "slice-master", name: "Slice Master", tags: ["action"] },
+  { slug: "slope", name: "Slope", tags: ["action"] },
+  { slug: "smart-ball", name: "Smart Ball", tags: ["puzzle"] },
+  { slug: "smash-karts", name: "Smash Karts", tags: ["racing","multiplayer"] },
+  { slug: "soccer-random", name: "Soccer Random", tags: ["multiplayer"] },
+  { slug: "station-saturn", name: "Station Saturn", tags: ["action"] },
+  { slug: "stickman-hook", name: "Stickman Hook", tags: ["platformer"] },
+  { slug: "subway-surfers-ny", name: "Subway Surfers NY", tags: ["action"] },
+  { slug: "subway-surfers", name: "Subway Surfers", tags: ["action"] },
+  { slug: "tanuki-sunset", name: "Tanuki Sunset", tags: ["racing"] },
+  { slug: "temple-run-2", name: "Temple Run 2", tags: ["action"] },
+  { slug: "the-final-earth", name: "The Final Earth", tags: ["idle"] },
+  { slug: "the-treasure", name: "The Treasure", tags: ["action"] },
+  { slug: "there-is-no-game", name: "There is No Game", tags: ["puzzle"] },
+  { slug: "tic-tac-what", name: "Tic Tac What", tags: ["puzzle","multiplayer"] },
+  { slug: "time-shooter-3", name: "Time Shooter 3", tags: ["action"] },
+  { slug: "time-shooter", name: "Time Shooter", tags: ["action"] },
+  { slug: "tiny-fishing", name: "Tiny Fishing", tags: ["idle"] },
+  { slug: "trace", name: "Trace", tags: ["puzzle"] },
+  { slug: "tunnel-rush", name: "Tunnel Rush", tags: ["action"] },
+  { slug: "two-ball-3d", name: "Two Ball 3D", tags: ["action"] },
+  { slug: "vex-3", name: "Vex 3", tags: ["platformer"] },
+  { slug: "vex-4", name: "Vex 4", tags: ["platformer"] },
+  { slug: "vex-5", name: "Vex 5", tags: ["platformer"] },
+  { slug: "vex-6", name: "Vex 6", tags: ["platformer"] },
+  { slug: "vex-7", name: "Vex 7", tags: ["platformer"] },
+  { slug: "volley-random", name: "Volley Random", tags: ["multiplayer"] },
+  { slug: "web-osu", name: "Web OSU", tags: ["action"] },
+  { slug: "where-is-the-water", name: "Where is the Water", tags: ["puzzle"] },
+  { slug: "x-trench-run", name: "X Trench Run", tags: ["action"] },
+  { slug: "yohoho", name: "Yohoho", tags: ["action","multiplayer"] },
+];
+
+// Color palettes for card thumbs
+const palettes = [
+  ['#0d1b2a','#00f5ff'],['#1a0d2e','#9d00ff'],['#1a0a0a','#ff0080'],
+  ['#0a1a0d','#00ff88'],['#1a1a0a','#ffcc00'],['#0a0d1a','#4488ff'],
+  ['#1a0d15','#ff44aa'],['#0d1a1a','#00ddcc'],['#150d1a','#cc44ff'],
+];
+
+const grid = document.getElementById('game-grid');
+const searchInput = document.getElementById('search');
+const resultCount = document.getElementById('result-count');
+const navCount = document.getElementById('nav-count');
+const modal = document.getElementById('modal');
+const gameFrame = document.getElementById('game-frame');
+const modalTitle = document.getElementById('modal-title');
+const closeBtn = document.getElementById('close-btn');
+
+navCount.textContent = games.length + ' GAMES';
+
+function getEmoji(slug) {
+  const map = {
+    slope:'🏔️', 'flappy-bird':'🐦', '2048':'🔢', 'cookie-clicker':'🍪',
+    'subway-surfers':'🏃', 'retro-bowl':'🏈', 'geometry-dash-lite':'⚡',
+    'run-3':'🏃', 'smash-karts':'🏎️', 'basketball-stars':'🏀',
+    'friday-night-funkin':'🎵', 'drift-boss':'🚗', motox3m:'🏍️',
+    'fireboy-and-watergirl':'🔥', 'stickman-hook':'🕷️', 'tiny-fishing':'🎣',
+    'doodle-jump':'🐸', 'chrome-dino':'🦕', 'tunnel-rush':'🌀',
+    'cut-the-rope':'✂️', 'crossy-road':'🐔', 'mario-game':'🍄',
+    'shadow-fight':'🥊', 'temple-run-2':'🏛️', 'idle-breakout':'🧱',
+    hextris:'🔷', ovo:'⭕', 'rooftop-snipers':'🎯', yohoho:'⚔️',
+    'monkey-mart':'🐒', 'eggy-car':'🥚', sandspiel:'⏳',
+  };
+  return map[slug] || '🎮';
+}
+
+function buildCards(list) {
+  grid.innerHTML = '';
+  if (list.length === 0) {
+    grid.innerHTML = '<div class="no-results" style="display:block;grid-column:1/-1;text-align:center;padding:4rem"><p style="font-family:Orbitron,monospace;font-size:.8rem;letter-spacing:3px;color:#6060a0">NO GAMES FOUND</p></div>';
+    resultCount.textContent = '0';
+    return;
+  }
+  resultCount.textContent = list.length;
+  list.forEach((game, i) => {
+    const p = palettes[i % palettes.length];
+    const card = document.createElement('div');
+    card.className = 'game-card';
+    card.innerHTML = `
+      <div class="card-thumb" style="background:${p[0]};color:${p[1]};font-size:2.2rem">${getEmoji(game.slug)}</div>
+      <div class="card-overlay"></div>
+      <div class="play-btn"></div>
+      <div class="card-info"><div class="card-name">${game.name}</div></div>
+    `;
+    card.addEventListener('click', () => openGame(game));
+    grid.appendChild(card);
+  });
+}
+
+function openGame(game) {
+  modalTitle.textContent = game.name.toUpperCase();
+  gameFrame.src = '/games/' + game.slug;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+closeBtn.addEventListener('click', () => {
+  modal.classList.remove('open');
+  gameFrame.src = '';
+  document.body.style.overflow = '';
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeBtn.click();
+});
+
+let activeFilter = 'all';
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    filterGames();
+  });
+});
+
+searchInput.addEventListener('input', filterGames);
+
+function filterGames() {
+  const q = searchInput.value.toLowerCase().trim();
+  let list = games;
+  if (activeFilter !== 'all') list = list.filter(g => g.tags.includes(activeFilter));
+  if (q) list = list.filter(g => g.name.toLowerCase().includes(q) || g.slug.includes(q));
+  buildCards(list);
+}
+
+buildCards(games);
+</script>
+</body>
 </html>
